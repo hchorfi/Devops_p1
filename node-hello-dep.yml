@@ -17,6 +17,7 @@ spec:
       containers:
       - name: nodeserver
         image: hchorfi/project1-node-hello:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3000
         
