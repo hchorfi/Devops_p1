@@ -14,6 +14,9 @@
 - name: install docker & minikube & kubectl
   hosts: devza
   tasks:
+    - name: install pip
+      command: apt install python-pip
+
     - name: Add Docker GPG apt Key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
@@ -26,6 +29,8 @@
 
     - name: Update apt and install docker-ce
       apt: update_cache=yes name=docker-ce state=latest
+    - name: install docker-py
+      command: pip install docker-py
 
     - name: donload minikube
       get_url:
@@ -41,12 +46,28 @@
       command: chmod +x ./kubectl
     - name: mv kubectl to bin
       command: mv ./kubectl /usr/local/bin/kubectl
+    - name: start minikube
+      command: minikube start --force
 
-- name: Jenkins config as code
-  hosts: devza
-  tasks:
+    - name: check repo if exist
+      stat:
+        path: "/root/project1"
+      register: project1
+    - name: clone repo and change dir
+      command: git clone https://github.com/hchorfi/node-hello.git project1
+      when: not project1.stat.exists
+
     - name: build jenkins image as code
-    - command: 
+      command:  chdir=/root/project1/jenkins/jcasc docker build -t jenkins:jcasc .
 
-
-
+    - name: check container if exist
+      docker_container_info:
+        name: jenkins
+      register: jenkins_container
+    - name: delete if exist
+      command: docker rm --force jenkins
+      when: jenkins_container.exists
+    - name: start jenkins container
+      command: docker run --name jenkins --rm -p 8080:8080 --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password --env JENKINS_URL_IP=$PUB_IP jenkins:jcasc
+      async: 120
+      poll: 0
