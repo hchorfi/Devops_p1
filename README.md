@@ -1,9 +1,5 @@
-# Node Hello World
+# Devops project 1
 
-Simple node.js app that servers "hello world"
+Simple project to get familar with Devops tools
 
-Great for testing simple deployments to the cloud
-
-## Run It
-
-`npm start`
+## WIP
