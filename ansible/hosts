@@ -1,5 +1,5 @@
 [devza]
-159.65.49.151
+134.209.182.185
 
 [devza:vars]
 ansible_ssh_private_key_file=~/.ssh/id_rsa

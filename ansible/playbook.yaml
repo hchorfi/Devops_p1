@@ -32,7 +32,7 @@
     - name: Update apt and install docker-ce
       apt: update_cache=yes name=docker-ce state=latest
     - name: install docker-py
-      command: pip install docker-py
+      command: pip install docker
 
     - name: donload minikube
       get_url:
