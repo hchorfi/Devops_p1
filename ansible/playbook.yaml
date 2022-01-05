@@ -13,9 +13,11 @@
 
 - name: install docker & minikube & kubectl
   hosts: devza
+  vars_files:
+    - bp_vars.yaml
   tasks:
     - name: install pip
-      command: apt install python-pip
+      command: apt install python-pip -y
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -68,6 +70,6 @@
       command: docker rm --force jenkins
       when: jenkins_container.exists
     - name: start jenkins container
-      command: docker run --name jenkins --rm -p 8080:8080 --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password --env JENKINS_URL_IP=$PUB_IP jenkins:jcasc
+      command: docker run --name jenkins --rm -p 8080:8080 --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password --env JENKINS_URL_IP={{jenkins_ip}} jenkins:jcasc
       async: 120
       poll: 0
