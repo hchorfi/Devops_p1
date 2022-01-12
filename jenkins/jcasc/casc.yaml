@@ -24,15 +24,9 @@ unclassified:
 credentials:
   system:
     domainCredentials:
-      - domain:
-          name: "test.com"
-          description: "test.com domain"
-          specifications:
-            - hostnameSpecification:
-                includes: "*.test.com"
-        credentials:
-          - usernamePassword:
-              scope: SYSTEM
-              id: sudo_password
-              username: root
-              password: test1234
+      - credentials:
+        - usernamePassword:
+            scope: SYSTEM
+            id: sudo_password
+            username: root
+            password: test1234
