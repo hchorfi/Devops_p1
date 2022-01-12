@@ -27,6 +27,6 @@ credentials:
       - credentials:
         - usernamePassword:
             scope: SYSTEM
-            id: sudo_password
-            username: root
-            password: test1234
+            id: dockerhublogin
+            username: ${DOCKER_HUB_USER}
+            password: ${DOCKER_HUB_TOKEN}
