@@ -20,3 +20,13 @@ security:
 unclassified:
   location:
     url: http://${JENKINS_URL_IP}:8080/
+
+credentials:
+  system:
+    domainCredentials:
+      credentials:
+        usernamePassword:
+          scope: SYSTEM
+          id: sudo_password
+          username: root
+          password: test
