@@ -11,7 +11,7 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git branch: 'main', url: 'https://github.com/hchorfi/node-hello.git'
+        git branch: 'main', url: 'https://github.com/hchorfi/Devops_p1.git'
       }
     }
 
