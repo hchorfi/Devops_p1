@@ -70,6 +70,6 @@
       command: docker rm --force jenkins
       when: jenkins_container.exists
     - name: start jenkins container
-      command: docker run -u 0 --privileged --name jenkins --rm -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker -v /home/jenkins_home:/var/jenkins_home --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password --env JENKINS_URL_IP={{jenkins_ip}} jenkins:jcasc
+      command: docker run -u 0 --privileged --name jenkins --rm -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password --env JENKINS_URL_IP={{jenkins_ip}} jenkins:jcasc
       async: 120
       poll: 0
