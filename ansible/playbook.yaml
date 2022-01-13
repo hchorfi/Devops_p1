@@ -78,5 +78,5 @@
       register: out
       async: 120
       poll: 0
-    - debug: var=out
+    - debug: var=out.stdout_lines
     - debug: var=out1.stdout_lines
