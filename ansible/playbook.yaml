@@ -74,7 +74,7 @@
       command: echo "{{jenkins_ip}} {{DOCKER_HUB_USER}} {{DOCKER_HUB_TOKEN}} {{JENKINS_ADMIN_ID}} {{JENKINS_ADMIN_PASSWORD}}"
       register: out1
     - name: start jenkins container
-      command: docker run -u 0 --privileged --name jenkins --rm -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --env JENKINS_ADMIN_ID={{JENKINS_ADMIN_ID}} --env JENKINS_ADMIN_PASSWORD={{JENKINS_ADMIN_PASSWORD}} --env JENKINS_URL_IP={{jenkins_ip}} --env DOCKER_HUB_USER={{DOCKER_HUB_USER}} --env DOCKER_HUB_TOKEN="{{DOCKER_HUB_TOKEN}}" jenkins:jcasc
+      command: docker run -u 0 --privileged --name jenkins -d -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --env JENKINS_ADMIN_ID={{JENKINS_ADMIN_ID}} --env JENKINS_ADMIN_PASSWORD={{JENKINS_ADMIN_PASSWORD}} --env JENKINS_URL_IP={{jenkins_ip}} --env DOCKER_HUB_USER={{DOCKER_HUB_USER}} --env DOCKER_HUB_TOKEN={{DOCKER_HUB_TOKEN}} jenkins:jcasc
       register: out
       async: 120
       poll: 0
