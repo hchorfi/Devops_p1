@@ -20,13 +20,3 @@ security:
 unclassified:
   location:
     url: http://${JENKINS_URL_IP}:8080/
-
-credentials:
-  system:
-    domainCredentials:
-      - credentials:
-        - usernamePassword:
-            scope: SYSTEM
-            id: dockerhublogin
-            username: ${DOCKER_HUB_USER}
-            password: ${DOCKER_HUB_TOKEN}
