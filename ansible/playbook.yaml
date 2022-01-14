@@ -87,8 +87,8 @@
         privileged: yes
         user: 0
         env:
-          JENKINS_ADMIN_ID: "Devza"
-          JENKINS_ADMIN_PASSWORD: "password"
+          JENKINS_ADMIN_ID: "{{JENKINS_ADMIN_ID}}"
+          JENKINS_ADMIN_PASSWORD: "{{JENKINS_ADMIN_PASSWORD}}"
         published_ports:
           - "8080:8080"
         volumes:
