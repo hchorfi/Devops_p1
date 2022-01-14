@@ -8,7 +8,7 @@ jenkins:
   authorizationStrategy:
     globalMatrix:
       permissions:
-        - "Overall/Administer:${JENKINS_ADMIN_ID}"
+        - "Overall/Administer:admin"
         - "Overall/Read:authenticated"
   remotingSecurity:
     enabled: true
@@ -19,4 +19,4 @@ security:
         strategy: triggeringUsersAuthorizationStrategy
 unclassified:
   location:
-    url: http://hg:8080/
+    url: http://test:8080/

@@ -66,6 +66,7 @@
       git:
         repo: https://github.com/hchorfi/Devops_p1.git
         dest: /root/project1
+        force: yes
 
     - name: build jenkins image
       docker_image:
