@@ -65,7 +65,7 @@
     - name: clone repo from github
       git:
         repo: https://github.com/hchorfi/Devops_p1.git
-        dest: /root
+        dest: /root/project1
 
     - name: build jenkins image
       docker_image:
@@ -73,6 +73,8 @@
         tag: jcasc
         build:
           path: /root/project1/jenkins/jcasc
+        source: build
+        nocache: yes
 
     - name: start jenkins container
       docker_container:
