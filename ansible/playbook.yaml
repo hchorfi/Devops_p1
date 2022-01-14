@@ -51,16 +51,21 @@
     # - name: start minikube
     #   command: minikube start --force
 
-    - name: check repo if exist
-      stat:
-        path: "/root/project1"
-      register: project1
-    - name: clone repo and change dir
-      command: git clone https://github.com/hchorfi/node-hello.git project1
-      when: not project1.stat.exists
+    # - name: check repo if exist
+    #   stat:
+    #     path: "/root/project1"
+    #   register: project1
+    # - name: clone repo and change dir
+    #   command: git clone https://github.com/hchorfi/node-hello.git project1
+    #   when: not project1.stat.exists
 
     # - name: build jenkins image as code
     #   command:  chdir=/root/project1/jenkins/jcasc docker build -t jenkins:jcasc .
+
+    - name: clone repo from github
+      git:
+        repo: https://github.com/hchorfi/Devops_p1.git
+        dest: /root
 
     - name: build jenkins image
       docker_image:
