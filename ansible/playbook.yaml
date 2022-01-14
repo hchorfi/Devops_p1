@@ -1,12 +1,12 @@
 ---
-- name: update repo and cach
-  hosts: devza
-  tasks:
-    - name: Update apt repo and cach
-      apt: 
-        update_cache: yes
-        force_apt_get: yes 
-        cache_valid_time: 3600
+# - name: update repo and cach
+#   hosts: devza
+#   tasks:
+#     - name: Update apt repo and cach
+#       apt: 
+#         update_cache: yes
+#         force_apt_get: yes 
+#         cache_valid_time: 3600
 
       # - name: install aptitude using apt
       #   apt: update_cache=yes name=aptitude state=latest force_apt_get=yes
@@ -16,40 +16,40 @@
   vars_files:
     - bp_vars.yaml
   tasks:
-    - name: install pip
-      command: apt install python-pip -y
+    # - name: install pip
+    #   command: apt install python-pip -y
 
-    - name: Add Docker GPG apt Key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
+    # - name: Add Docker GPG apt Key
+    #   apt_key:
+    #     url: https://download.docker.com/linux/ubuntu/gpg
+    #     state: present
 
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu bionic stable
-        state: present
+    # - name: Add Docker Repository
+    #   apt_repository:
+    #     repo: deb https://download.docker.com/linux/ubuntu bionic stable
+    #     state: present
 
-    - name: Update apt and install docker-ce
-      apt: update_cache=yes name=docker-ce state=latest
-    - name: install docker-py
-      command: pip install docker
+    # - name: Update apt and install docker-ce
+    #   apt: update_cache=yes name=docker-ce state=latest
+    # - name: install docker-py
+    #   command: pip install docker
 
-    - name: donload minikube
-      get_url:
-        url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-        dest: /tmp
-        mode: +x
+    # - name: donload minikube
+    #   get_url:
+    #     url: https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+    #     dest: /tmp
+    #     mode: +x
 
-    - name: mv minikube
-      command: mv /tmp/minikube-linux-amd64 /usr/local/bin/minikube
-    - name: download kubectl
-      command: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.1/bin/linux/amd64/kubectl
-    - name: chmode kubectl
-      command: chmod +x ./kubectl
-    - name: mv kubectl to bin
-      command: mv ./kubectl /usr/local/bin/kubectl
-    - name: start minikube
-      command: minikube start --force
+    # - name: mv minikube
+    #   command: mv /tmp/minikube-linux-amd64 /usr/local/bin/minikube
+    # - name: download kubectl
+    #   command: curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.1/bin/linux/amd64/kubectl
+    # - name: chmode kubectl
+    #   command: chmod +x ./kubectl
+    # - name: mv kubectl to bin
+    #   command: mv ./kubectl /usr/local/bin/kubectl
+    # - name: start minikube
+    #   command: minikube start --force
 
     - name: check repo if exist
       stat:
@@ -59,17 +59,32 @@
       command: git clone https://github.com/hchorfi/node-hello.git project1
       when: not project1.stat.exists
 
-    - name: build jenkins image as code
-      command:  chdir=/root/project1/jenkins/jcasc docker build -t jenkins:jcasc .
+    # - name: build jenkins image as code
+    #   command:  chdir=/root/project1/jenkins/jcasc docker build -t jenkins:jcasc .
 
-    - name: check container if exist
-      docker_container_info:
+    - name: build jenkins image
+      docker_image:
         name: jenkins
-      register: jenkins_container
-    - name: delete if exist
-      command: docker rm --force jenkins
-      when: jenkins_container.exists
+        tag: jcasc
+        build:
+          path: /root/project1/jenkins/jcasc
+
     - name: start jenkins container
-      command: docker run -u 0 --privileged --name jenkins --rm -p 8080:8080 -v /var/run/docker.sock:/var/run/docker.sock -v $(which docker):/usr/bin/docker --env JENKINS_ADMIN_ID=admin --env JENKINS_ADMIN_PASSWORD=password --env JENKINS_URL_IP={{jenkins_ip}} jenkins:jcasc
+      docker_container:
+        name: jenkins
+        image: jenkins:jcasc
+        recreate: yes
+        state: started
+        detach: yes
+        privileged: yes
+        user: 0
+        env:
+          JENKINS_ADMIN_ID: "Devza"
+          JENKINS_ADMIN_PASSWORD: "password"
+        published_ports:
+          - "8080:8080"
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+          - /usr/bin/docker:/usr/bin/docker
       async: 120
       poll: 0
