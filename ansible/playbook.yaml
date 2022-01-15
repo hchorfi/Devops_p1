@@ -97,5 +97,7 @@
         volumes:
           - /var/run/docker.sock:/var/run/docker.sock
           - /usr/bin/docker:/usr/bin/docker
+          - jenkins_home:/var/jenkins_home
+          - /root/project1/jenkins/jcasc/casc.yaml:/var/jenkins_home/casc.yaml
       async: 120
       poll: 0
