@@ -8,7 +8,7 @@ jenkins:
   authorizationStrategy:
     globalMatrix:
       permissions:
-        - "Overall/Administer:Devza"
+        - "Overall/Administer:admin"
         - "Overall/Read:authenticated"
   remotingSecurity:
     enabled: true

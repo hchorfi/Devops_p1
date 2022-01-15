@@ -92,6 +92,7 @@
           DOCKER_HUB_USER: "{{DOCKER_HUB_USER}}"
           DOCKER_HUB_TOKEN: "{{DOCKER_HUB_TOKEN}}"
           JENKINS_URL_IP: "{{JENKINS_URL_IP}}"
+          CASC_JENKINS_CONFIG: "/var/jenkins_home/casc.yaml"
         published_ports:
           - "8080:8080"
         volumes:
