@@ -1,7 +1,6 @@
 # Devops project 1
 
-Simple project to get familar with Devops tools with Digitaloceon as a cloud infrastructure, terraform as provisioning and ansible as configuration management tools.
-also i use a simple jenkis pipline to deploy to my single node cluster (minikube).
+Simple project to get familiar with DevOps tools with Digitaloceon as cloud infrastructure, terraform as provisioning, and ansible as configuration management tools. also, i use a simple Jenkins pipeline to deploy to my single node cluster (minikube).
 
 ## WIP
 
