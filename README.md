@@ -4,4 +4,4 @@ Simple project to get familar with Devops tools
 
 ## WIP
 
-![alt text](https://media-exp1.licdn.com/dms/image/C5622AQErzCKHhqpNsg/feedshare-shrink_2048_1536/0/1641055740221?e=1658966400&v=beta&t=BK-ptP0oy7kd9jDCaQXfbZzp-DPawTv-B1egx686oo0)
+![1641055740221](https://user-images.githubusercontent.com/26097794/183058059-a7391d51-94bf-4fcd-a751-a7241f950a1f.jpeg)
